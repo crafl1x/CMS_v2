@@ -4,7 +4,7 @@
     {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{ title|default(webtitle)|default("Website") }}</title>
+    <title>{{ title|default(webinfo.websitename)|default("Website") }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/8310320da1.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/style.css">
@@ -14,7 +14,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
         <div class="container">
         
-            <a href="." class="navbar-brand">{{ webtitle }}</a>
+            <a href="." class="navbar-brand">{{ webinfo.websitename }}</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -51,12 +51,12 @@
         <div class="container text-white">
             <div class="row row-cols-lg-3">
                 <div>
-                    <div class="h1">{{ webtitle }}</div>
+                    <div class="h1">{{ webinfo.websitename }}</div>
                 </div>
                 <div>
-                    {% if contacts %}
+                    {% if webinfo.contacts %}
                         <ul class="list-unstyled flex-row">
-                            {% for contact in contacts %}
+                            {% for contact in webinfo.contacts %}
                                 <span class='text-white-50'>{{ contact.name }}:</span>
                                 <div class='ps-2'>{{ contact.info }}</div>
                             {% endfor %}
@@ -65,9 +65,9 @@
                     
                 </div>
                 <div>
-                    {% if socials %}
+                    {% if webinfo.socials %}
                         <ul class="list-unstyled flex-row">
-                            {% for social in socials %}
+                            {% for social in webinfo.socials %}
                                 <li><a href="{{ social.link }}" class="text-white">{{ social.name }}</a></li>
                             {% endfor %}
                         </ul>

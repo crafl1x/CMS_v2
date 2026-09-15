@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Database\Database;
 use PDO;
 
-class PostController extends Controller {
+class PostController extends PublicController {
 
 
     public function endpoint() {

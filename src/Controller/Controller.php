@@ -17,8 +17,12 @@ class Controller {
         $loader = new FilesystemLoader(__DIR__ . "/../../templates");
         $this->twig = new Environment($loader);
 
-        $this->twig_globals["isLogin"] = Auth::isLogin();
-        $this->twig_globals["avaibleRoles"] = Auth::getAvaibleRoles();
+
+
+        $this->addToTwigGlobals([
+            "isLogin" => Auth::isLogin(), 
+            "avaibleRoles" => Auth::getAvaibleRoles()
+        ]);
     }
 
     protected function addToTwigGlobals(array $data): void {

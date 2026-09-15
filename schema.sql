@@ -20,3 +20,11 @@ CREATE TABLE IF NOT EXISTS `posts` (
     PRIMARY KEY (`id`)
 
 ) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `webinfo` (
+    `id` INT NOT NULL AUTO_INCREMENT , 
+    `key` VARCHAR(255) NOT NULL , 
+    `value` TEXT,
+
+    PRIMARY KEY (`id`, `key`)
+) ENGINE = InnoDB;
