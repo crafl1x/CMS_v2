@@ -31,6 +31,10 @@ class Auth {
         }
     }
 
+    public static function getAvaibleRoles(): array {
+        return self::$avaibleRoles;
+    }
+
     public static function getUserID() : ?int {
         return $_SESSION['user_id'] ?? null;
     }
