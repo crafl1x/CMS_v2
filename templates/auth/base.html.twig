@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if option == 'signup' %} Registrace {% else %} Přihlasit {% endif %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+    .form-signin {
+        max-width: 330px;
+    }
+    </style>
+</head>
+
+<body class="h-100 bg-body-tertiary d-flex align-items-center">
+
+
+    <main class="form-signin p-3 w-100 m-auto d-flex flex-column">
+        <form method="post">
+            <h1 class="h3 mb-3 fw-normal text-center">{% if option == 'signup' %} Registrace {% else %} Přihlasit {% endif %}</h1>
+            <div class="form-floating">
+                <input 
+                type="email" 
+                name="email" 
+                class="form-control rounded-bottom-0 {% if inValid.email %}is-invalid{% endif %}" 
+                id="floatingInput" 
+                placeholder="name@example.com" 
+                value="{{ info.email }}">
+                <label for="floatingInput">Email</label>
+            </div>
+            <div class="form-floating">
+                <input 
+                type="password" 
+                name="password" 
+                class="form-control {% if option == 'signup' %}rounded-0{% else %}rounded-top-0{% endif %} {% if inValid.password %}is-invalid{% endif %}" 
+                id="floatingPassword" 
+                placeholder=""
+                >
+                <label for="floatingPassword">Heslo</label>
+            </div>
+
+            {% if option == 'signup' %}
+            <div class="form-floating">
+                <input
+                type="password"
+                name="passwordVerify"
+                class="form-control rounded-top-0 {% if inValid.passwordDismatch %}is-invalid{% endif %}"
+                id="floatingPasswordVerify"
+                placeholder="Potvrzení Hesla"
+                >
+                <label for="floatingPasswordVerify">Potvrzení Hesla</label>
+            </div>
+            {% endif %}
+
+            {% if error %}
+                <div class='alert alert-danger mt-1'>Něco je špatně</div>
+            {% endif %}
+
+            {% if requirements %}
+                <div class="mt-1">
+                    <ul class="list-unstyled ps-2">
+                    {% for requirement in requirements %}
+                        <li class="{% if requirement.status == 'wrong' %} text-danger fw-bold {% elseif requirement.status == 'correct' %} text-success {% endif %}>">{{ requirement.message }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <button class="btn btn-primary w-100 py-2 mt-2" type="submit">{% if option == 'signup' %} Registrovat se {% else %} Přihlasit se {% endif %}</button>
+        </form>
+        <a href="/{% if option == 'signup' %}login{% else %}signup{% endif %}" class="text-center text-black-50 mt-2">{% if option == 'signup' %}Už mám účet{% else %}Ještě nemám účet{% endif %}</a>
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

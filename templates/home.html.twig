@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+{{ parent() }}
+<style>
+
+    .custom-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    
+    .custom-grid > div:first-child {
+        grid-column: 1 / -1;
+    }
+
+</style>
+{% endblock %}
+
+
+
+{% block base_content %}
+
+    
+<header class="bg-light py-4 border-bottom mb-4">
+    <div class="container">
+            {% block header %}
+                <div class="text-center">
+                    <h1 class='fw-bolder'>{{ motd.first }}</h1>
+                    <p class='lead'>{{ motd.seccond }}</p>
+                </div>
+            {% endblock %}
+    </div>
+</header>
+    
+
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="d-lg-grid gap-3 custom-grid">
+            
+            {% for post in posts %}
+                {% include "card.html.twig" with post %}
+            {% endfor %}
+            
+        </div>
+    </div>
+</main>
+
+{% endblock %}

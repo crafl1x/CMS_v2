@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block base_content %}
+<div class="container mt-5">
+    <article>
+        <header class="d-flex flex-row justify-content-between">
+            <div>
+            <h1>{{ name }}</h1>
+            <div class="text-muted">{{ author }}</div>
+            <div class="text-muted">{{ time }}</div>
+            </div>
+            <div><a href="/savepost?id={{ id }}"> {% if save %} <i class='fa-solid fa-bookmark'></i> {% else %} <i class='fa-regular fa-bookmark'></i>{% endif %}</a></div>
+        </header>
+        <hr>
+        <div>
+            {{ content }}
+        </div>
+    </article>
+</div>
+{% endblock %}

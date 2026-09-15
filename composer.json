@@ -1,0 +1,13 @@
+{
+    "name": "crafl1x/cms",
+    "type": "project",
+    "require": {
+        "twig/twig": "^3.28"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "Core\\": "core/"
+        }
+    }
+}
