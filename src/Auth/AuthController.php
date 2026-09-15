@@ -144,6 +144,10 @@ class AuthController extends Controller{
             "inValid" => $inValid 
         ]);
     }
+
+    public function logout() {
+        Auth::logoutUser();
+    }
 }
 
 ?>

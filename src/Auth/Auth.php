@@ -21,6 +21,7 @@ class Auth {
 
             Router::add("/login", "\App\Auth\AuthController", "login");
             Router::add("/signup", "\App\Auth\AuthController", "signup");
+            Router::add("/logout", "\App\Auth\AuthController", "logout");
 
 
             if (!isset($_SESSION['user_id'])) {
@@ -188,6 +189,13 @@ class Auth {
         }
 
         return null;
+    }
+
+    public static function logoutUser(): void {
+
+        self::setUserID(null);
+        header("location: /");
+        exit;
     }
 
 }
