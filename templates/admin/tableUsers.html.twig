@@ -1,0 +1,54 @@
+{% extends "/admin/base.html.twig" %}
+
+{% block base_content %}
+
+
+
+<h1>Users</h1>
+<div>
+    <form method="get" class="d-flex h-75 pb-2">
+        <div class="col-lg-10">
+        <input type="search" name="search" id="search" class="form-control" placeholder="example@example.com" value="{{ lastSearch.search }}">
+        </div>
+        <select name="role" id="role" class="form-select">
+            <option value="">Role</option>
+
+            {% for role in avaibleRoles %}
+                <option value='{{role}}'{% if role == lastSearch.role %}selected{% endif %}>{{role}}</option>
+            {% endfor %}
+        
+            
+        </select>
+        <input type="submit" class="btn btn-primary" value="Search">
+    </form>
+</div>
+<table class="table table-striped w-100">
+    
+    <tr>
+        <td>#</td>
+        <td>Email</td>
+        <td>Role</td>
+        <td>Created</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+
+    {% for user in users %}
+        <tr>
+            {% for info in user %}
+                <td>{{info}}</td>
+            {% endfor %}
+            <td><a href='/admin/users/edit?id={{user.id}}'>Edit</a></td>
+            <td>
+            {% if user.role == 'admin' and lockAdminDelete %}
+                <a href='' class="link-secondary">Delete</a>
+            {% else %}
+                <a href='/admin/users/delete?id={{user.id}}'>Delete</a>
+            {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

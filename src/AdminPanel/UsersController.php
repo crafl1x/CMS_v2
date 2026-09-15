@@ -33,7 +33,7 @@ class UsersController extends AdminController {
             $lockAdminDelete = false;
         }
 
-        $this->render("/admin/table.html.twig", ["users" => $users, "lockAdminDelete" => $lockAdminDelete, "lastSearch" => $search]);
+        $this->render("/admin/tableUsers.html.twig", ["users" => $users, "lockAdminDelete" => $lockAdminDelete, "lastSearch" => $search]);
     }
 
     private function countAdmins(): int {
