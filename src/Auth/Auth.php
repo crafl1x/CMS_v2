@@ -43,20 +43,23 @@ class Auth {
         $_SESSION['user_id'] = $id;
     }
 
-    public static function getUserRole(): string {
-        if (self::isLogin()) {
-            $db = Database::connect();
-            $conn = $db->prepare("SELECT `role` FROM `users` WHERE `id` = :id");
-            $conn->bindValue(":id", self::getUserID(), PDO::PARAM_INT);
-            $conn->execute();
-
-            $req = $conn->fetch();
-
-            if ($req) {
-                return $req['role'];
-            }
+    public static function getUserRole(?int $id = null): string {
+        if ($id === null) {
+            $id = Auth::getUserID();   
         }
 
+        
+        $db = Database::connect();
+        $conn = $db->prepare("SELECT `role` FROM `users` WHERE `id` = :id");
+        $conn->bindValue(":id", self::getUserID(), PDO::PARAM_INT);
+        $conn->execute();
+
+        $req = $conn->fetch();
+
+        if ($req) {
+            return $req['role'];
+        }
+        
         return 'user';
     }
 
