@@ -3,6 +3,7 @@
 {% block base_content %}
 <div class="container h-100">
     
+    
 
     <form method="post" class="h-100">
         <div class="d-flex align-items-center justify-content-between">
@@ -14,13 +15,13 @@
         </div>
         {% if mode != 'new' %}<input type='hidden' name='id' value='{{ post.id }}'>{% endif %}
         <label for="name" class="form-label">Post Name:</label>
-        <input type="text" id="name" name="name" class="form-control form-control-lg" value="{{ post.name }}">
+        <input type="text" id="name" name="name" class="form-control form-control-lg" {% if mode == 'delete' %}disabled{% endif %} value="{{ post.name }}">
         <label for="author" class="form-label">Author:</label>
-        <input type="text" id="author" name="author" class="form-control" value="{{ post.author }}">
+        <input type="text" id="author" name="author" class="form-control" {% if mode == 'delete' %}disabled{% endif %} value="{{ post.author }}">
         <label for="perex" class="form-label">Perex:</label>
-        <textarea name="perex" id="perex" class="form-control ">{{ post.perex }}</textarea>
+        <textarea name="perex" id="perex" class="form-control" {% if mode == 'delete' %}disabled{% endif %}>{{ post.perex }}</textarea>
         <label for="content" class="form-label">Post Content:</label>
-        <textarea name="content" id="content" class="form-control field-sizing">{{ post.content }}</textarea>
+        <textarea name="content" id="content" class="form-control field-sizing" {% if mode == 'delete' %}disabled{% endif %}>{{ post.content }}</textarea>
         <div class="d-flex justify-content-end">
             {% if mode != 'delete' %}
             <input type="submit" value="{% if mode == 'new' %}Create Post{% elseif mode == 'edit' %}Edit Post{% endif %}" class="btn btn-primary mt-2">

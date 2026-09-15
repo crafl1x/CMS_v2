@@ -160,7 +160,33 @@ class PostsController extends AdminController {
     }
 
     public function delete(): void {
-        
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $form = new Form();
+            $form->post('id');
+            $id = $form->dispatch()['id'];
+
+            $db = Database::connect();
+            $conn = $db->prepare("DELETE FROM `posts` WHERE `id`=:id");
+            $conn->bindValue(":id", $id, PDO::PARAM_INT);
+            $conn->execute();
+
+            header("location: /admin/posts");
+            exit;
+        }
+
+        $form = new Form();
+        $form->get('id');
+        $id = $form->dispatch()['id'];
+
+        $db = Database::connect();
+        $conn = $db->prepare("SELECT `id`,`name`,`author`,`timestamp`,`status` FROM `posts` WHERE `id` = :id");
+        $conn->bindValue(":id", $id, PDO::PARAM_INT);
+        $conn->execute();
+
+        $formData = $conn->fetch();
+
+        $this->render("/admin/postsForm.html.twig", ['mode' => "delete", "post" => $formData]);    
     }
 }
 
