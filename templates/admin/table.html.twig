@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "/admin/base.html.twig" %}
 
 {% block base_content %}
 
@@ -8,13 +8,13 @@
 <div>
     <form method="get" class="d-flex h-75 pb-2">
         <div class="col-lg-10">
-        <input type="search" name="search" id="search" class="form-control" placeholder="example@example.com" value="<?= $_GET['search'] ?? '' ?>">
+        <input type="search" name="search" id="search" class="form-control" placeholder="example@example.com" value="">
         </div>
         <select name="role" id="role" class="form-select">
             <option value="">Role</option>
 
             {% for role in avaibleRoles %}
-                <option value='{{role}}' <?= (isset($_GET['role']) and $_GET['role'] == $value) ? 'selected' : '' ?>>{{role}}</option>
+                <option value='{{role}}'>{{role}}</option>
             {% endfor %}
         
             
