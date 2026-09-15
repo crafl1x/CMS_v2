@@ -4,7 +4,7 @@
 
 
 
-<h1>Users</h1>
+<h1>Post Manager</h1>
 <div>
     <form method="get" class="d-flex h-75 pb-2">
         <div class="col-lg-6">
@@ -32,6 +32,7 @@
         <td>Name</td>
         <td>Author</td>
         <td>Created</td>
+        <td>Status</td>
         <td>Edit</td>
         <td>Delete</td>
     </tr>
@@ -41,8 +42,8 @@
             {% for info in post %}
                 <td>{{info}}</td>
             {% endfor %}
-            <td><a href='/admin/posts/edit?id={{user.id}}'>Edit</a></td>
-            <td><a href='/admin/posts/delete?id={{user.id}}'>Delete</a></td>
+            <td><a href='/admin/posts/edit?id={{post.id}}'>Edit</a></td>
+            <td><a href='/admin/posts/delete?id={{post.id}}'>Delete</a></td>
         </tr>
     {% endfor %}
 

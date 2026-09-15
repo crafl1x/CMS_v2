@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
     `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , 
     `perex` VARCHAR(255) NULL,
     `content` TEXT NULL , 
-    `public` BOOLEAN NOT NULL,
+    `status` ENUM('public', 'private') NOT NULL DEFAULT 'private',
     
     PRIMARY KEY (`id`)
 
