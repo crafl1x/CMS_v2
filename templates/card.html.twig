@@ -1,7 +1,6 @@
 <div class="card">
     <div class="card-body">
         <div class="small text-muted">{{ date }}</div>
-        <div class="cardSaveButton"><a href="/savepost?id={{ id }}">{% if saved %} <i class='fa-solid fa-bookmark'></i> {% else %} <i class='fa-regular fa-bookmark'></i> {% endif %}</a></div>
         <a href="/post?id={{ id }}" class="text-dark link-underline-dark link-underline-opacity-0 link-underline-opacity-75-hover"><h2>{{ name }}</h2></a>
         <p>{{ perex }}</p>
         <a href="/post?id={{ id }}" class="btn btn-primary">Číst dál →</a>

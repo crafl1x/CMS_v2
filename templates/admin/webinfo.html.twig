@@ -1,0 +1,42 @@
+{% extends "/admin/base.html.twig" %}
+
+{% block base_content %}
+<div class="container">
+
+    
+
+    <form method="post" class="d-flex flex-column gap-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1>Web Info</h1>
+            <input type="submit" value="Save" class="btn btn-primary">
+        </div>
+        {% if success %}<div class="alert alert-success">Info updated Successfuly</div>{% endif %}
+        <div class="card card-body">
+            <h2 class="card-title h5">Credentials</h2>
+            <label for="sitename" class="form-label">Website Name:</label>
+            <input type="text" id="sitename" autocomplete="off" class="form-control" name="websitename" placeholder="Website" value="{{ webinfo.websitename }}">
+            <label for="phone" class="form-label">Phone:</label>
+            <input type="tel" id="phone" autocomplete="off" class="form-control <?= $errors['phone'] ? 'is-invalid' : '' ?>" name="phone" placeholder="+420 000 000 000" value="{{ webinfo.phone }}">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" autocomplete="off" class="form-control <?= $errors['email'] ? 'is-invalid' : '' ?>" name="email" placeholder="example@domain.com" value="{{ webinfo.email }}">
+        </div>
+
+        <div class="card card-body">
+            <h2 class="card-title h5">Welcome Messages</h2>
+            <label for="welcome" class="form-label">Main:</label>
+            <input type="text" id="welcome" autocomplete="off" class="form-control <?= $errors['welcome'] ? 'is-invalid' : '' ?>" name="welcome" placeholder="Vítej na Webu" value="{{ webinfo.welcome }}">
+            <label for="sec_welcome" class="form-label">Second:</label>
+            <input type="text" id="sec_welcome" autocomplete="off" class="form-control <?= $errors['sec_welcome'] ? 'is-invalid' : '' ?>" name="sec_welcome" placeholder="Prohlédněte si naše novinky..." value="{{ webinfo.sec_welcome }}">
+        </div>
+
+        <div class="card card-body">
+            <h2 class="card-title h5">Social Sites</h2>
+            <label for="ig_link" class="form-label">Instagram:</label>
+            <input type="url" class="form-control" id="ig_link" name="instagram" placeholder="https://instagram.com/..." value="{{ webinfo.instagram|raw }}">
+            <label for="fb_link" class="form-label">Facebook:</label>
+            <input type="url" class="form-control" id="fb_link" name="facebook" placeholder="https://facebook.com/..." value="{{ webinfo.facebook|raw }}">
+        </div>
+        
+    </form>    
+</div>
+{% endblock %}

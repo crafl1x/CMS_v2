@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS `posts` (
 CREATE TABLE IF NOT EXISTS `webinfo` (
     `id` INT NOT NULL AUTO_INCREMENT , 
     `key` VARCHAR(255) NOT NULL , 
-    `value` TEXT,
+    `value` TEXT NULL,
 
-    PRIMARY KEY (`id`, `key`)
+    PRIMARY KEY (`id`),
+    UNIQUE `key` (`key`)
 ) ENGINE = InnoDB;

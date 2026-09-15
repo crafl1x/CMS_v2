@@ -20,6 +20,8 @@ Router::add("/admin/posts/new", "\App\AdminPanel\PostsController", "new");
 Router::add("/admin/posts/edit", "\App\AdminPanel\PostsController", "edit");
 Router::add("/admin/posts/delete", "\App\AdminPanel\PostsController", "delete");
 
+Router::add("/admin/webinfo", "\App\AdminPanel\WebInfoController", "endpoint");
+
 Router::add("/", "\App\Controller\HomeController", "endpoint");
 Router::add("/post", "\App\Controller\PostController", "endpoint");
 

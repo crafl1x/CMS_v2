@@ -19,17 +19,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1">
-                    <li class="nav-item"><a class="nav-link" href="/">Domů</a></li>
-
-                    {% if isLogin %}
-                        <li class="nav-item"><a class="nav-link" href="/saved">Uložené příspěvky</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/settings">Nastavení</a></li>
-                        <li  class="nav-item"><a class="nav-link" href="/logout">Odhlasit se</a></li>
-                    {% else %}
-                        <li class='nav-item'><a href='/login' class='nav-link'>Přihlasit se</a></li>
-                        <li class='nav-item'><a href='/signup' class='nav-link'>Zaregistrovat se</a></li>
-                    {% endif %}              
-                    
+                    <li class="nav-item"><a class="nav-link" href="/">Domů</a></li>                   
 
                     <li>
                         <form action="/" method="get" class="d-flex flex-row gap-1">
@@ -57,8 +47,8 @@
                     {% if webinfo.contacts %}
                         <ul class="list-unstyled flex-row">
                             {% for contact in webinfo.contacts %}
-                                <span class='text-white-50'>{{ contact.name }}:</span>
-                                <div class='ps-2'>{{ contact.info }}</div>
+                                {% if contact.info %}<span class='text-white-50'>{{ contact.name }}:</span>
+                                <div class='ps-2'>{{ contact.info }}</div>{% endif %}
                             {% endfor %}
                         </ul>
                     {% endif %}                    
@@ -68,7 +58,7 @@
                     {% if webinfo.socials %}
                         <ul class="list-unstyled flex-row">
                             {% for social in webinfo.socials %}
-                                <li><a href="{{ social.link }}" class="text-white">{{ social.name }}</a></li>
+                                {% if social.info %}<li><a href="{{ social.info }}" class="text-white">{{ social.name }}</a></li>{% endif %}
                             {% endfor %}
                         </ul>
                     {% endif %}
