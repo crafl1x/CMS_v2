@@ -2,10 +2,9 @@
 
 namespace App\AdminPanel;
 
-use App\Controller\Controller;
 use App\Database\Database;
 
-class UsersController extends Controller {
+class UsersController extends AdminController {
 
     public function endpoint() {
 

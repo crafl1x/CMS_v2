@@ -2,9 +2,7 @@
 
 namespace App\AdminPanel;
 
-use \App\Controller\Controller;
-
-class DashboardController extends Controller {
+class DashboardController extends AdminController {
 
     public function endpoint() {
 
