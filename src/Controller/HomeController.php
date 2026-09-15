@@ -17,7 +17,7 @@ class HomeController extends Controller {
         } else {
 
             $db = Database::connect();
-            $conn = $db->query("SELECT * FROM posts WHERE public = 1");
+            $conn = $db->query("SELECT * FROM posts WHERE `status` = 'public'");
             $data = $conn->fetchAll();
         }
 
@@ -29,7 +29,7 @@ class HomeController extends Controller {
 
     private function search(string $search): array {
         $db = Database::connect();
-        $conn = $db->prepare("SELECT * FROM posts WHERE public = 1 AND (name LIKE :search OR perex LIKE :search)");
+        $conn = $db->prepare("SELECT * FROM posts WHERE `status` = 'public' AND (name LIKE :search OR perex LIKE :search)");
         $conn->bindValue(":search","%".$search."%", PDO::PARAM_STR);
         $conn->execute();
         return $conn->fetchAll();

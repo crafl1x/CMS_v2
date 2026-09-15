@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Core\Database\Database;
+use App\Database\Database;
 use PDO;
 
 class PostController extends Controller {
@@ -14,7 +14,7 @@ class PostController extends Controller {
 
         $db = Database::connect();
 
-        $conn = $db->prepare("SELECT * FROM posts WHERE public = 1 AND id = :id");
+        $conn = $db->prepare("SELECT * FROM posts WHERE `status` = 'public' AND id = :id");
         $conn->bindValue(":id", $id, PDO::PARAM_INT);
         $conn->execute();
 
