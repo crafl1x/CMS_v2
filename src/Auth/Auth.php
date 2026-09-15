@@ -100,7 +100,8 @@ class Auth {
         }
 
         if (!self::isUserMinimalRole($minimalRole)){
-            echo "403 No Permision";
+            header("location: /");
+            exit;
         }
 
     }
