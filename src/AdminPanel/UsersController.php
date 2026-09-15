@@ -14,16 +14,26 @@ class UsersController extends AdminController {
 
         Auth::requireLogin('admin');
 
+        $form = new Form();
+        $form->get('search', '');
+        $form->get('role', '');
+
+        $search = $form->dispatch();
+
+
         $db = Database::connect();
-        $conn = $db->query("SELECT `id`,`email`,`role`,`timestamp` FROM `users`");
+        $conn = $db->prepare("SELECT `id`,`email`,`role`,`timestamp` FROM `users` WHERE `email` LIKE :search AND `role` LIKE :role");
+        $conn->bindValue(":search","%".$search['search']."%", PDO::PARAM_STR);
+        $conn->bindValue(":role","%".$search['role']."%", PDO::PARAM_STR);
+        $conn->execute();
         $users = $conn->fetchAll();
 
         $lockAdminDelete = true;
         if ($this->countAdmins() > 1) {
-            $lockAdminDelete = true;
+            $lockAdminDelete = false;
         }
 
-        $this->render("/admin/table.html.twig", ["users" => $users, "lockAdminDelete" => $lockAdminDelete]);
+        $this->render("/admin/table.html.twig", ["users" => $users, "lockAdminDelete" => $lockAdminDelete, "lastSearch" => $search]);
     }
 
     private function countAdmins(): int {
@@ -42,20 +52,19 @@ class UsersController extends AdminController {
 
         Auth::requireLogin('admin');
 
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->editPOST();
+        }
+
         $form = new Form();
         $form->get('id');
         $form->post('id');
         $id = $form->dispatch()['id'];
 
-        if ($id == null or (Auth::getUserRole($id) == "admin" and $this->countAdmins() < 2)) {
+        if ($id == null) {
             header("location: /admin/users");
             exit;
         }
-
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $this->editPOST();
-        }
-
 
         $db = Database::connect();
         $conn = $db->prepare("SELECT `id`,`email`,`role`,`timestamp` FROM `users` WHERE `id` = :id");
@@ -78,18 +87,23 @@ class UsersController extends AdminController {
         $req = $form->dispatch();
 
 
-        if (!in_array($req['role'], Auth::getAvaibleRoles())) {
-            return;
-        }
+        if (in_array($req['role'], Auth::getAvaibleRoles())) {
+        
 
-        try {
-            $db = Database::connect();
-            $conn = $db->prepare("UPDATE `users` SET `role`=:role WHERE `id`=:id");
-            $conn->bindValue(":id", $req['id'], PDO::PARAM_INT);
-            $conn->bindValue(":role", $req['role'], PDO::PARAM_STR);
-            $conn->execute();
-        } catch (PDOException $e) {
-            throw new PDOException($e->getMessage(), $e->getCode());
+        if (!(Auth::getUserRole($req['id']) == "admin" and $this->countAdmins() < 2)) {
+        
+
+            try {
+                $db = Database::connect();
+                $conn = $db->prepare("UPDATE `users` SET `role`=:role WHERE `id`=:id");
+                $conn->bindValue(":id", $req['id'], PDO::PARAM_INT);
+                $conn->bindValue(":role", $req['role'], PDO::PARAM_STR);
+                $conn->execute();
+            } catch (PDOException $e) {
+                throw new PDOException($e->getMessage(), $e->getCode());
+            }
+
+            }
         }
 
         
