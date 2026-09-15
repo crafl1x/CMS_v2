@@ -2,7 +2,8 @@
     "name": "crafl1x/cms",
     "type": "project",
     "require": {
-        "twig/twig": "^3.28"
+        "twig/twig": "^3.28",
+        "vlucas/phpdotenv": "^5.7"
     },
     "autoload": {
         "psr-4": {

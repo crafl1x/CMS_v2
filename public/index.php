@@ -1,11 +1,12 @@
 <?php
 require_once __DIR__ . "/../vendor/autoload.php";
 
-use App\AdminPanel\AdminPanel;
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../");
+$dotenv->load();
+
 use App\Auth\Auth;
 use App\Router\Router;
 
-AdminPanel::enable();
 Auth::enable();
 
 Router::add("/admin", "\App\AdminPanel\DashboardController", "endpoint");
