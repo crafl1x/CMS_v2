@@ -21,7 +21,11 @@ class Controller {
         $this->twig_globals["avaibleRoles"] = Auth::getAvaibleRoles();
     }
 
-    public function render(string $template, array $data = []) {
+    protected function addToTwigGlobals(array $data): void {
+        $this->twig_globals = array_merge($this->twig_globals, $data);
+    }
+
+    public function render(string $template, array $data = []): void {
         echo $this->twig->render($template, array_merge($this->twig_globals, $data));
     }
 
