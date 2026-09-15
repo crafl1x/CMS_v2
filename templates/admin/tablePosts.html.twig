@@ -1,0 +1,51 @@
+{% extends "/admin/base.html.twig" %}
+
+{% block base_content %}
+
+
+
+<h1>Users</h1>
+<div>
+    <form method="get" class="d-flex h-75 pb-2">
+        <div class="col-lg-6">
+            <input type="search" name="search" id="search" class="form-control" placeholder="Post name..." value="{{ lastSearch.search }}">
+        </div>
+        <div class="col-lg-4">
+            <input type="search" name="author" id="author" class="form-control" placeholder="Author..." value="{{ lastSearch.author }}">
+        </div>
+        <select name="status" id="status" class="form-select">
+            <option value="">Status</option>
+            
+            {% for status in ['public', 'private'] %}
+                <option value='{{status}}'{% if status == lastSearch.status %}selected{% endif %}>{{status}}</option>
+            {% endfor %}
+            
+            
+        </select>
+        <input type="submit" class="btn btn-primary" value="Search">
+    </form>
+</div>
+<table class="table table-striped w-100">
+    
+    <tr>
+        <td>#</td>
+        <td>Name</td>
+        <td>Author</td>
+        <td>Created</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+
+    {% for post in posts %}
+        <tr>
+            {% for info in post %}
+                <td>{{info}}</td>
+            {% endfor %}
+            <td><a href='/admin/posts/edit?id={{user.id}}'>Edit</a></td>
+            <td><a href='/admin/posts/delete?id={{user.id}}'>Delete</a></td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

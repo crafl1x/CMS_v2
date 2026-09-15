@@ -31,9 +31,11 @@
                     <div class="d-md-flex flex-column p-0 b">
                         <ul class="nav flex-column mb-auto">
                             <li><a href="/admin" class="nav-link "><i class="fa-solid fa-gauge me-1"></i>Dashboard</a></li>
+                            <li><a href="/admin/posts" class="nav-link "><i class="fa-solid fa-copy me-1"></i>Post Manager</a></li>
 
                             {% if account.role == "admin" %}
                                 <li><a href="/admin/users" class="nav-link "><i class="fa-solid fa-user me-1"></i>Users</a></li>
+                                
                             {% endif %}
                         </ul>
                         <hr>
