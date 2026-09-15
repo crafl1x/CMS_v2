@@ -11,6 +11,7 @@ Auth::enable();
 
 Router::add("/admin", "\App\AdminPanel\DashboardController", "endpoint");
 Router::add("/admin/users", "\App\AdminPanel\UsersController", "endpoint");
+Router::add("/admin/users/edit", "\App\AdminPanel\UsersController", "edit");
 
 Router::add("/", "\App\Controller\HomeController", "endpoint");
 Router::add("/post", "\App\Controller\PostController", "endpoint");

@@ -1,0 +1,30 @@
+{% extends "/admin/base.html.twig" %}
+
+{% block base_content %}
+<div class="container">
+    <h1>{{ form_name }}</h1>
+    <form method="post" class="w-25">
+        <input type="hidden" name="id" value="{{ item.id }}">
+        <label for="id" class="form-label">ID:</label>
+        <input type="number" id="id" disabled class="form-control w-100 bg-opacity-10 bg-dark text-muted" value="{{ item.id }}">
+        <label for="email" class="form-label">Email:</label>
+        <input type="text" id="email" disabled value="{{ item.email }}" class="form-control w-100 bg-opacity-10 bg-dark text-muted">
+        <label for="role" class="form-label">Role:</label>
+
+        {% if lockRole %}
+            <input type="text" id="role" name="role" disabled value="{{ item.role }}" class="form-control w-100 bg-opacity-10 bg-dark text-muted">
+        {% else %}
+            <select name="role" id="role" class="form-control w-100 p-1 ps-4">
+                {% for role in avaibleRoles %}
+                    <option value='{{role}}'>{{role}}</option>
+                {% endfor %}
+            </select>
+            
+        {% endif %}
+
+        {% if error %}<div class='alert alert-danger mt-1'>Some thing is wroing</div>{% endif %}
+        <input type="submit" class="btn btn-primary w-100 mt-2" value="Edit User">
+    </form>
+</div>
+
+{% endblock %}

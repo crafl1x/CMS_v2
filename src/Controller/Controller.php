@@ -18,6 +18,7 @@ class Controller {
         $this->twig = new Environment($loader);
 
         $this->twig_globals["isLogin"] = Auth::isLogin();
+        $this->twig_globals["avaibleRoles"] = Auth::getAvaibleRoles();
     }
 
     public function render(string $template, array $data = []) {
