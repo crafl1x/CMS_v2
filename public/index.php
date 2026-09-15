@@ -16,6 +16,7 @@ Router::add("/admin/users/edit", "\App\AdminPanel\UsersController", "edit");
 Router::add("/admin/users/delete", "\App\AdminPanel\UsersController", "delete");
 
 Router::add("/admin/posts", "\App\AdminPanel\PostsController", "endpoint");
+Router::add("/admin/posts/new", "\App\AdminPanel\PostsController", "new");
 Router::add("/admin/posts/edit", "\App\AdminPanel\PostsController", "edit");
 Router::add("/admin/posts/delete", "\App\AdminPanel\PostsController", "delete");
 

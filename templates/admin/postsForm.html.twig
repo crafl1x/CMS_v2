@@ -1,0 +1,34 @@
+{% extends "/admin/base.html.twig" %}
+
+{% block base_content %}
+<div class="container h-100">
+    
+
+    <form method="post" class="h-100">
+        <div class="d-flex align-items-center justify-content-between">
+            <h1>{% if mode == 'new' %}Create Post{% elseif mode == 'edit' %}Edit Post{% elseif mode == 'delete' %}Delete Post{% endif %}</h1>
+            <div class="form-check form-switch">
+                <label for="status" class="h3">Public</label>
+                <input type="checkbox" name="status" id="status"  class="form-check-input h3"{% if status == 'public' %}checked{% endif %}>
+            </div>
+        </div>
+        {% if mode != 'new' %}<input type='hidden' name='id' value='{$id}'>{% endif %}
+        <label for="name" class="form-label">Post Name:</label>
+        <input type="text" id="name" name="name" class="form-control form-control-lg" value="{{ post.name }}">
+        <label for="author" class="form-label">Author:</label>
+        <input type="text" id="author" name="author" class="form-control" value="{{ post.author }}">
+        <label for="perex" class="form-label">Perex:</label>
+        <textarea name="perex" id="perex" class="form-control ">{{ post.perex }}</textarea>
+        <label for="content" class="form-label">Post Content:</label>
+        <textarea name="content" id="content" class="form-control field-sizing">{{ post.content }}</textarea>
+        <div class="d-flex justify-content-end">
+            {% if mode != 'delete' %}
+            <input type="submit" value="{% if mode == 'new' %}Create Post{% elseif mode == 'edit' %}Edit Post{% endif %}" class="btn btn-primary mt-2">
+            {% else %}
+            <input type="submit" value="Delete Post" class="btn btn-danger mt-2">
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+{% endblock %}
