@@ -103,8 +103,60 @@ class PostsController extends AdminController {
 
     public function edit(): void {
 
+        
 
-        $this->render("/admin/postsForm.html.twig", ['mode' => "edit"]);    
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $form = new Form();
+            $form->post('id');
+            $form->post('name');
+            $form->post('author');
+            $form->post('perex');
+            $form->post('content');
+            $form->post('status', 'private');
+            $formData = $form->dispatch();
+
+            if ($formData['status'] == 'on') {
+                $formData['status'] = 'public';
+            }
+
+            $error = $this->validateData($formData);
+
+            if ($error === []) {
+                try {
+                    $db = Database::connect();
+                    $conn = $db->prepare("UPDATE `posts` SET `name`=:name, `author`=:author, `status`=:status, `perex`=:perex, `content`=:content WHERE `id`=:id");
+                    $conn->bindValue(":id", $formData['id'], PDO::PARAM_INT);
+                    $conn->bindValue(":name", $formData['name'], PDO::PARAM_STR);
+                    $conn->bindValue(":author", $formData['author'], PDO::PARAM_STR);
+                    $conn->bindValue(":status", $formData['status'], PDO::PARAM_STR);
+                    $conn->bindValue(":perex", $formData['perex'], PDO::PARAM_STR);
+                    $conn->bindValue(":content", $formData['content'], PDO::PARAM_STR);
+                    $conn->execute();
+
+                    header("location: /admin/posts");
+                    exit;
+                } catch (PDOException $e) {
+                    throw new PDOException($e->getMessage());
+                }
+
+                
+            }
+
+
+        } else {
+            $form = new Form();
+            $form->get('id');
+            $id = $form->dispatch()['id'];
+
+            $db = Database::connect();
+            $conn = $db->prepare("SELECT `id`,`name`,`author`,`timestamp`,`status` FROM `posts` WHERE `id` = :id");
+            $conn->bindValue(":id", $id, PDO::PARAM_INT);
+            $conn->execute();
+
+            $formData = $conn->fetch();
+        }
+
+        $this->render("/admin/postsForm.html.twig", ['mode' => "edit", "post" => $formData]);    
     }
 
     public function delete(): void {
