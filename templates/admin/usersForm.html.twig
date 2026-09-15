@@ -23,7 +23,11 @@
         {% endif %}
 
         {% if error %}<div class='alert alert-danger mt-1'>Some thing is wroing</div>{% endif %}
-        <input type="submit" class="btn btn-primary w-100 mt-2" value="Edit User">
+        {% if mode == "edit" %}
+            <input type="submit" class="btn btn-primary w-100 mt-2" value="Edit User">
+        {% elseif mode == "delete" %}
+            <input type="submit" class="btn btn-danger w-100 mt-2" value="Delete User">
+        {% endif %}
     </form>
 </div>
 
