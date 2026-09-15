@@ -51,7 +51,7 @@ class Auth {
         
         $db = Database::connect();
         $conn = $db->prepare("SELECT `role` FROM `users` WHERE `id` = :id");
-        $conn->bindValue(":id", self::getUserID(), PDO::PARAM_INT);
+        $conn->bindValue(":id", $id, PDO::PARAM_INT);
         $conn->execute();
 
         $req = $conn->fetch();
