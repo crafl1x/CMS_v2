@@ -16,7 +16,7 @@ class UsersController extends Controller {
         var_dump($users);
 
 
-        $this->render("table.html.twig", $users);
+        $this->render("/admin/table.html.twig", $users);
     }
 
     public function edit() {}

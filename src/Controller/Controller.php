@@ -5,7 +5,7 @@ namespace App\Controller;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-use Core\Auth\Auth;
+use App\Auth\Auth;
 
 class Controller {
 

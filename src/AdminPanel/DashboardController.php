@@ -10,7 +10,7 @@ class DashboardController extends Controller {
 
         
 
-        $this->render("base.html.twig");
+        $this->render("/admin/base.html.twig");
     }
 
 }

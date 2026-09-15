@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use Core\Database\Database;
+use App\Database\Database;
 use PDO;
 
 class HomeController extends Controller {

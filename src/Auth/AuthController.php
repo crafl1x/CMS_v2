@@ -43,7 +43,7 @@ class AuthController extends Controller{
         }
 
 
-        $this->render("base.html.twig", [
+        $this->render("/auth/auth.html.twig", [
             "option" => "login", 
             "info" => $info, 
             "error" => $error
@@ -136,7 +136,7 @@ class AuthController extends Controller{
 
         
 
-        $this->render("base.html.twig", [
+        $this->render("/auth/auth.html.twig", [
             "option" => "signup", 
             "requirements" => $requirements, 
             "error" => $error, 
