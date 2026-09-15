@@ -12,10 +12,8 @@ class UsersController extends AdminController {
         $conn = $db->query("SELECT `id`,`email`,`role`,`timestamp` FROM users");
         $users = $conn->fetchAll();
 
-        var_dump($users);
 
-
-        $this->render("/admin/table.html.twig", $users);
+        $this->render("/admin/table.html.twig", ["users" => $users]);
     }
 
     public function edit() {}
