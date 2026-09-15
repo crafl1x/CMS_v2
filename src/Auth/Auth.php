@@ -92,7 +92,7 @@ class Auth {
             self::openLogin();
         }
 
-        if (self::isUserMinimalRole($minimalRole)){
+        if (!self::isUserMinimalRole($minimalRole)){
             echo "403 No Permision";
         }
 
