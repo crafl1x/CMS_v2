@@ -38,7 +38,13 @@
                 <td>{{info}}</td>
             {% endfor %}
             <td><a href='/admin/users/edit?id={{user.id}}'>Edit</a></td>
-            <td><a href='/admin/users/delete?id={{user.id}}'>Delete</a></td>
+            <td>
+            {% if user.role == 'admin' and lockAdminDelete %}
+                <a href='' class="link-secondary">Delete</a>
+            {% else %}
+                <a href='/admin/users/delete?id={{user.id}}'>Delete</a>
+            {% endif %}
+            </td>
         </tr>
     {% endfor %}
 

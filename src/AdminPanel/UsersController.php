@@ -18,8 +18,12 @@ class UsersController extends AdminController {
         $conn = $db->query("SELECT `id`,`email`,`role`,`timestamp` FROM `users`");
         $users = $conn->fetchAll();
 
+        $lockAdminDelete = true;
+        if ($this->countAdmins() > 1) {
+            $lockAdminDelete = true;
+        }
 
-        $this->render("/admin/table.html.twig", ["users" => $users]);
+        $this->render("/admin/table.html.twig", ["users" => $users, "lockAdminDelete" => $lockAdminDelete]);
     }
 
     private function countAdmins(): int {
@@ -38,19 +42,20 @@ class UsersController extends AdminController {
 
         Auth::requireLogin('admin');
 
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            $this->editPOST();
-        }
-
         $form = new Form();
         $form->get('id');
         $form->post('id');
         $id = $form->dispatch()['id'];
 
-        if ($id == null) {
+        if ($id == null or (Auth::getUserRole($id) == "admin" and $this->countAdmins() < 2)) {
             header("location: /admin/users");
             exit;
         }
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $this->editPOST();
+        }
+
 
         $db = Database::connect();
         $conn = $db->prepare("SELECT `id`,`email`,`role`,`timestamp` FROM `users` WHERE `id` = :id");
@@ -71,6 +76,7 @@ class UsersController extends AdminController {
         $form->post('id');
         $form->post('role');
         $req = $form->dispatch();
+
 
         if (!in_array($req['role'], Auth::getAvaibleRoles())) {
             return;
@@ -105,7 +111,7 @@ class UsersController extends AdminController {
         $form->post('id');
         $id = $form->dispatch()['id'];
 
-        if ($id == null) {
+        if ($id == null or ($this->countAdmins() < 2 and Auth::getUserRole($id) == 'admin')) {
             header("location: /admin/users");
             exit;
         }

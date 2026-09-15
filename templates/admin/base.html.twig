@@ -31,8 +31,10 @@
                     <div class="d-md-flex flex-column p-0 b">
                         <ul class="nav flex-column mb-auto">
                             <li><a href="/admin" class="nav-link "><i class="fa-solid fa-gauge me-1"></i>Dashboard</a></li>
-                            <li><a href="/admin/users" class="nav-link "><i class="fa-solid fa-user me-1"></i>Users</a></li>
 
+                            {% if account.role == "admin" %}
+                                <li><a href="/admin/users" class="nav-link "><i class="fa-solid fa-user me-1"></i>Users</a></li>
+                            {% endif %}
                         </ul>
                         <hr>
                         <ul class="nav flex-column mb-auto">
@@ -42,7 +44,7 @@
 
                         <div class="ps-3">
                             <div class="small">You are login as:</div>
-                            <div>{{user.email}}</div>
+                            <div>{{account.email}}</div>
                         </div>
                         
                         
